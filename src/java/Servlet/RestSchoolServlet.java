@@ -10,6 +10,7 @@ import Entity.TblStudent;
 import Entity.TblTeacher;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,13 +28,16 @@ public class RestSchoolServlet extends HttpServlet {
     SchoolClient sc = new SchoolClient();
     Response res;
     Collection<TblStd> std;
-    GenericType<Collection<TblStd>> gstd = new GenericType<Collection<TblStd>>(){};
-    
+    GenericType<Collection<TblStd>> gstd = new GenericType<Collection<TblStd>>() {
+    };
+
     Collection<TblTeacher> tech;
-    GenericType<Collection<TblTeacher>> gtech = new GenericType<Collection<TblTeacher>>(){};
-    
-    Collection<TblStudent>stud;
-    GenericType<Collection<TblStudent>> gstud = new GenericType<Collection<TblStudent>>(){};
+    GenericType<Collection<TblTeacher>> gtech = new GenericType<Collection<TblTeacher>>() {
+    };
+
+    Collection<TblStudent> stud;
+    GenericType<Collection<TblStudent>> gstud = new GenericType<Collection<TblStudent>>() {
+    };
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +63,7 @@ public class RestSchoolServlet extends HttpServlet {
 //            sc.insertStd("abc");
 //            sc.insertStudent("", stdId);
 //            sc.insertTeacher("Namita");
-            Integer x = 7 , y =5;
+//            Integer x = 7, y = 5;
 //            sc.removeStd(x.toString());
 //            sc.removeStudent(x.toString());
 //            sc.removeTeacher(x.toString());
@@ -67,26 +71,31 @@ public class RestSchoolServlet extends HttpServlet {
 //            sc.updateStd(x.toString(), "Standard 4");
 //               sc.updateTeacher(x.toString(), "Aman");
 //                sc.updateStudent(x.toString(), "Baby", y.toString());
-
-            res=sc.allStd(Response.class);
+                  Integer x = 7;
+                Collection<Integer> ids = new ArrayList<Integer>();
+                ids.add(1);
+                ids.add(2);
+//                sc.addTeacherToStd(ids, x.toString());
+//                   sc.removeTeacherToStd(ids, x.toString());
+            res = sc.allStd(Response.class);
             std = res.readEntity(gstd);
             out.println("<h1>Standard Collection</h1>");
             for (TblStd stds : std) {
                 out.println("<h3> Standard Name :" + stds.getStdname() + " </h3>");
             }
-            
-            res= sc.allTeacher(Response.class);
+
+            res = sc.allTeacher(Response.class);
             tech = res.readEntity(gtech);
             out.println("<h1>Teacher Collection</h1>");
             for (TblTeacher techs : tech) {
                 out.println("<h3> Standard Name :" + techs.getTeacherName() + " </h3>");
             }
-            
+
             res = sc.allStudent(Response.class);
             stud = res.readEntity(gstud);
             out.println("<h1>Student Collection</h1>");
             for (TblStudent studs : stud) {
-                out.println("<h3> Student Name :" + studs.getStudname() + " And " +"Standard Name : " + studs.getStdid().getStdname() + " </h3>");
+                out.println("<h3> Student Name :" + studs.getStudname() + " And " + "Standard Name : " + studs.getStdid().getStdname() + " </h3>");
             }
             out.println("<h1>Servlet RestSchoolServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");

@@ -122,16 +122,17 @@ public class SchoolResource {
         return ssb.allStudent();
     }
 
-//    @POST
-//    @Path("addTeacherToStd/{teacherId}/{stdId}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void addTeacherToStd(@PathParam("teacherId") Collection<Integer> teacherId, @PathParam("stdId") Integer stdId) {
-//        ssb.addTeacherToStd(teacherId, stdId);
-//    }
-//
-//    @DELETE
-//    @Path("removeTeacherToStd/{teacherId}/{stdId}")
-//    public void removeTeacherToStd(@PathParam("teacherId") Collection<Integer> teacherId ,@PathParam("stdId") Integer stdId){
-//        
-//    }
+    @POST
+    @Path("addTeacherToStd/{stdId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addTeacherToStd(Collection<Integer> teacherId, @PathParam("stdId") Integer stdId) {
+        ssb.addTeacherToStd(teacherId, stdId);
+    }
+
+    @POST
+    @Path("removeTeacherToStd/{stdId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void removeTeacherToStd(Collection<Integer> teacherId ,@PathParam("stdId") Integer stdId){
+        ssb.removeTeacherToStd(teacherId, stdId);
+    }
 }
